@@ -1,0 +1,6 @@
+{
+  "name": "com.anothermind.finitestatemachine",
+   "version":"1.0.0",
+   "description":"Finite State machine implemented with interfaces",
+   "displayName":"Finite State Machine"
+}
