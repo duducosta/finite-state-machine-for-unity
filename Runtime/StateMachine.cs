@@ -7,6 +7,7 @@ using System;
 public class StateMachine
 {
     private IState _currentState;
+    public event Action<IState, IState> OnStateChange;  //IState from, IState to
 
     private Dictionary<Type, List<Transition>> _transitions = new Dictionary<Type, List<Transition>>();
     private List<Transition> _currentTransitions = new List<Transition>();
@@ -33,13 +34,19 @@ public class StateMachine
             return;
         }
 
+        if (_currentState == null)
+        {
+            OnStateChange?.Invoke(_currentState, state);
+        }
+
+        OnStateChange?.Invoke(_currentState, state);
         _currentState?.OnExit();        //Executes the things to exit the previous state
 
         _currentState = state;          //Changes to the current state
         UpdateCurrentTransitions();     //Updates the current transitions list 
 
-
         _currentState.OnEnter();        //Executes the things to enter current state
+
     }
 
 
@@ -115,5 +122,28 @@ public class StateMachine
     public IState GetCurrentState()
     {
         return _currentState;
+    }
+
+    public void ListTransitions()
+    {
+        foreach (var transition in _transitions)
+        {
+            Debug.Log("FROM: " + transition.Key);
+            foreach (Transition value in transition.Value)
+            {
+                Debug.Log("TO: " + value.To);
+            }
+        }
+        Debug.Log("---------");
+    }
+
+    public void ListCurrentTransitions()
+    {
+        foreach (Transition transition in _currentTransitions)
+        {
+            Debug.Log("Current state: " + _currentState);
+            Debug.Log("TO: " + transition.To);
+        }
+        Debug.Log("---------");
     }
 }
