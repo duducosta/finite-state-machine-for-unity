@@ -8,4 +8,5 @@ public interface IState
     void Tick();
     void OnExit();
 
+    //TO DO: Consider adding FixedTick() and LateTick(), and change the current Tick() to UpdateTick()
 }
