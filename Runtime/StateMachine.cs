@@ -26,6 +26,8 @@ public class StateMachine
 
         _currentState?.Tick();
     }
+    
+    //TO DO: Consider adding FixedTick() and LateTick(), and change the current Tick() to UpdateTick()
 
     public void SetState(IState state)
     {
