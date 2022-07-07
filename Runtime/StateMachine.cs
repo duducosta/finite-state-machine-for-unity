@@ -28,6 +28,7 @@ public class StateMachine
     }
     
     //TO DO: Consider adding FixedTick() and LateTick(), and change the current Tick() to UpdateTick()
+    //To DO 2: Create en enum for selection of where this handler will make the transition (Fixed Update, Update or LateUpdate). Also, get the lines 20 to 25 refactor it to a method called CheckForTransition() and call it in every Tick type, but only execute it on the chosen one.
 
     public void SetState(IState state)
     {
